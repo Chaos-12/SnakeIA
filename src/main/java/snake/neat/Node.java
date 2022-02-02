@@ -8,7 +8,8 @@ public class Node {
     private final int id;
 
     private double weight = 1.0;
-    private int deepness = 0;
+    private int layer = 0;
+    private int indexLayer = 0;
 
     private List<Connection> links = new ArrayList<Connection>();
 
@@ -29,20 +30,38 @@ public class Node {
         return this.weight;
     }
 
+    public void setWeight(double value){
+        this.weight = value;
+    }
+
     public void addWeight(double value){
         this.weight += value;
     }
 
-    public int getDeepness(){
-        return this.deepness;
+    public int getLayer(){
+        return this.layer;
     }
 
-    public void propagateDeepness(int newDeepness){
-        if (this.type == NodeType.sensor || this.deepness <= newDeepness){
-            this.deepness = newDeepness;
+    public void assignLayer(int newLayer){
+        if (this.type == NodeType.sensor || this.layer < newLayer){
+            this.layer = newLayer;
             for (Connection link : this.links) {
                 link.propagateDeepness();
             }
+        }
+    }
+
+    public int getIndexLayer(){
+        return this.indexLayer;
+    }
+
+    public void setIndexLayer(int index){
+        this.indexLayer = index;
+    }
+
+    public void propagate(){
+        for (Connection link : links) {
+            link.propagateWeight();
         }
     }
 

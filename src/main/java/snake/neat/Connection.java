@@ -19,7 +19,7 @@ public class Connection {
     }
 
     public void propagateDeepness(){
-        this.finalNode.propagateDeepness(this.startNode.getDeepness()+1);
+        this.finalNode.assignLayer(this.startNode.getLayer()+1);
     }
 
     public void setEnabled(boolean value){

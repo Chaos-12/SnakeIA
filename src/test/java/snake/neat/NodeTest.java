@@ -40,30 +40,30 @@ public class NodeTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = { 0, 1, 2, 12 })
-    public void propagateDeepnessChangesDeep(int newDeepness) {
+    @ValueSource(ints = { 1, 2, 12 })
+    public void asignLayerChangesLayer(int newLayer) {
         Node neuron = new Node(0, NodeType.hidden);
-        neuron.propagateDeepness(newDeepness);
-        assertEquals(newDeepness, neuron.getDeepness());
+        neuron.assignLayer(newLayer);
+        assertEquals(newLayer, neuron.getLayer());
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 0, 1, 2, 12 })
-    public void propagateDeepnessOnlyIfGreater(int newDeepness) {
+    public void asignLayerOnlyIfGreater(int newLayer) {
         Node neuron = new Node(0, NodeType.hidden);
-        neuron.propagateDeepness(newDeepness + 1);
-        neuron.propagateDeepness(newDeepness);
-        assertEquals(newDeepness + 1, neuron.getDeepness());
+        neuron.assignLayer(newLayer + 1);
+        neuron.assignLayer(newLayer);
+        assertEquals(newLayer + 1, neuron.getLayer());
     }
 
     @ParameterizedTest
     @ValueSource(ints = { 0, 1, 2, 12 })
-    public void propagateDeepnessPropagates(int newDeepness) {
-        Node neuron1 = new Node(0, NodeType.hidden);
+    public void asignLayerPropagates(int newLayer) {
+        Node neuron1 = new Node(0, NodeType.sensor);
         Node neuron2 = new Node(1, NodeType.hidden);
         Connection link = new Connection(neuron1, neuron2, 0.0);
         neuron1.addConnection(link);
-        neuron1.propagateDeepness(newDeepness);
-        assertEquals(newDeepness + 1, neuron2.getDeepness());
+        neuron1.assignLayer(newLayer);
+        assertEquals(newLayer + 1, neuron2.getLayer());
     }
 }
