@@ -24,6 +24,7 @@ public class Network {
         for(int i=0; i < Network.nOutputs; i++){
             this.createNewNode(NodeType.output);
         }
+        orderNetwork();
     }
 
     public static void setNumberOfNodes(int nInputs, int nOutputs){
@@ -61,7 +62,7 @@ public class Network {
         }
         //Bias node always weights 1
         nodeMap.get(0).setWeight(1);
-        //Asign sensor nodes with input weights
+        //Assign sensor nodes with input weights
         for (int i=0; i < Network.nInputs; i++){
             nodeMap.get(i+1).setWeight(input[i]);
         }
@@ -83,7 +84,7 @@ public class Network {
     }
 
     public void orderNetwork(){
-        //Asign layer=0 to the sensor nodes (and propagate)
+        //Assign layer=0 to the sensor nodes (and propagate)
         for (int i=1; i <= Network.nInputs; i++){
             nodeMap.get(i).assignLayer(0);
         }
@@ -111,5 +112,9 @@ public class Network {
                 }
             }
         }
+    }
+
+    public int getDeepness(){
+        return this.deepness;
     }
 }

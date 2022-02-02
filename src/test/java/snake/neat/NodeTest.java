@@ -41,7 +41,7 @@ public class NodeTest {
 
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 12 })
-    public void asignLayerChangesLayer(int newLayer) {
+    public void assignLayerChangesLayer(int newLayer) {
         Node neuron = new Node(0, NodeType.hidden);
         neuron.assignLayer(newLayer);
         assertEquals(newLayer, neuron.getLayer());
@@ -49,7 +49,7 @@ public class NodeTest {
 
     @ParameterizedTest
     @ValueSource(ints = { 0, 1, 2, 12 })
-    public void asignLayerOnlyIfGreater(int newLayer) {
+    public void assignLayerOnlyIfGreater(int newLayer) {
         Node neuron = new Node(0, NodeType.hidden);
         neuron.assignLayer(newLayer + 1);
         neuron.assignLayer(newLayer);
@@ -58,7 +58,7 @@ public class NodeTest {
 
     @ParameterizedTest
     @ValueSource(ints = { 0, 1, 2, 12 })
-    public void asignLayerPropagates(int newLayer) {
+    public void assignLayerPropagates(int newLayer) {
         Node neuron1 = new Node(0, NodeType.sensor);
         Node neuron2 = new Node(1, NodeType.hidden);
         Connection link = new Connection(neuron1, neuron2, 0.0);
