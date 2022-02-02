@@ -1,4 +1,4 @@
-package neat;
+package snake.neat;
 
 public class Neat {
     

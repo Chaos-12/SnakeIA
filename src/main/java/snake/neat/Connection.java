@@ -1,21 +1,15 @@
-package neat;
+package snake.neat;
 
 public class Connection {
     private final Node startNode;
     private final Node finalNode;
-    private final int label;
     private double weight;
     private boolean enabled = true;
 
-    public Connection(Node from, Node to, int innovationNumber, double weight){
+    public Connection(Node from, Node to, double weight){
         this.startNode = from;
         this.finalNode = to;
-        this.label = innovationNumber;
         this.weight = weight;
-    }
-
-    public Connection(Node from, Node to, int innovationNumber){
-        this(from, to, innovationNumber, Neat.getRandomWeight());
     }
 
     public void propagateWeight(){
@@ -30,5 +24,22 @@ public class Connection {
 
     public void setEnabled(boolean value){
         this.enabled = value;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        if (!(object instanceof Connection)) {
+            return false;
+        }
+        Connection otherConnection = (Connection) object;
+        return this.startNode.equals(otherConnection.startNode) && this.finalNode.equals(otherConnection.finalNode);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + startNode.hashCode();
+        hash = 31 * hash + finalNode.hashCode();
+        return hash;
     }
 }
