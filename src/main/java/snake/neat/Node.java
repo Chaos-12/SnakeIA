@@ -38,7 +38,7 @@ public class Node {
     }
 
     public void propagateDeepness(int newDeepness){
-        if (this.type == NodeType.sensor || this.deepness < newDeepness){
+        if (this.type == NodeType.sensor || this.deepness <= newDeepness){
             this.deepness = newDeepness;
             for (Connection link : this.links) {
                 link.propagateDeepness();
